@@ -1,4 +1,4 @@
-# Page Summarizer — AI Chrome Extension
+# ⚡️ Voltly Summarizer - AI Chrome Extension
 
 A Chrome Extension (Manifest V3) that extracts content from any webpage and returns a structured AI summary using Google Gemini. Built with a secure Vercel proxy so the API key is never exposed in the extension.
 
