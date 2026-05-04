@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Voltly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Sora:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="popup">
+      <header class="header">
+        <div class="logo" aria-hidden="true">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            width="18"
+            height="18"
+          >
+            <path d="M13 10H20L11 23V14H4L13 1V10Z"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="header-title">Voltly</div>
+          <div class="header-sub">Your AI-powered reading companion</div>
+        </div>
+      </header>
+
+      <div class="page-info">
+        <div class="page-title" id="page-title">Loading...</div>
+        <div class="page-url" id="page-url"></div>
+      </div>
+
+      <main class="body">
+        <!-- Empty -->
+        <div class="state" id="state-empty">
+          <p class="hint">
+            Click below to summarize this page Quickly with Voltly
+          </p>
+          <button class="btn-primary" id="summarize-btn">
+            Summarize page
+          </button>
+        </div>
+
+        <!-- Loading -->
+        <div
+          class="state hidden"
+          id="state-loading"
+          role="status"
+          aria-live="polite"
+        >
+          <div class="spinner"></div>
+          <span class="hint">Summarizing...</span>
+        </div>
+
+        <!-- Error -->
+        <div class="state hidden" id="state-error" role="alert">
+          <p class="error-text" id="error-text">Something went wrong.</p>
+          <button class="btn-secondary" id="retry-btn">Try again</button>
+        </div>
+
+        <!-- Output -->
+        <div class="hidden" id="state-output">
+          <div class="section-label">Key points</div>
+          <ul class="bullets" id="bullets"></ul>
+
+          <div class="divider"></div>
+
+          <div class="section-label">Insights</div>
+          <div class="insights" id="insights"></div>
+
+          <div class="meta-row">
+            <span class="reading-time" id="reading-time">
+              <svg
+                viewBox="0 0 12 12"
+                fill="none"
+                width="12"
+                height="12"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="6"
+                  cy="6"
+                  r="5"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                />
+                <path
+                  d="M6 3.5V6l1.5 1.5"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <span id="reading-time-text">—</span>
+            </span>
+            <button class="copy-btn" id="copy-btn">
+              <svg
+                viewBox="0 0 11 11"
+                fill="none"
+                width="11"
+                height="11"
+                aria-hidden="true"
+              >
+                <rect
+                  x="1"
+                  y="3"
+                  width="7"
+                  height="7.5"
+                  rx="1.5"
+                  stroke="currentColor"
+                  stroke-width="1.1"
+                />
+                <path
+                  d="M3 2V1.5A1.5 1.5 0 014.5 0h4A1.5 1.5 0 0110 1.5v6A1.5 1.5 0 018.5 9H8"
+                  stroke="currentColor"
+                  stroke-width="1.1"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <span id="copy-label">Copy</span>
+            </button>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <button class="clear-btn" id="clear-btn">Clear</button>
+        <span class="cached-tag hidden" id="cached-tag">cached</span>
+      </footer>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>
