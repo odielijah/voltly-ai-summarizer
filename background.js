@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-async function handleSummarize({ content, title, url }) {
+async function handleSummarize({ content, title, url, briefMode }) {
   // Check cache first
   const cached = await chrome.storage.local.get(url);
   if (cached[url]) {

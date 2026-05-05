@@ -1,5 +1,6 @@
 const $ = (id) => document.getElementById(id);
 let summaryData = null;
+let briefMode = false;
 
 function show(id) {
   ["state-empty", "state-loading", "state-error", "state-output"].forEach((s) =>
@@ -29,6 +30,14 @@ function renderSummary(data, cached = false) {
   });
 
   $("reading-time-text").textContent = data.readingTime || "—";
+
+  const wordCount =
+    data.wordCount ||
+    Math.round(
+      summaryData.bullets?.join(" ").split(" ").length +
+        summaryData.insights?.join(" ").split(" ").length,
+    );
+  $("word-count-text").textContent = wordCount + " words";
   $("cached-tag").classList.toggle("hidden", !cached);
   show("state-output");
 
@@ -73,7 +82,7 @@ async function summarize() {
 
     const result = await chrome.runtime.sendMessage({
       action: "summarize",
-      data: pageData,
+      data: { ...pageData, briefMode },
     });
     if (result?.error) showError(result.error);
     else if (result?.summary) renderSummary(result.summary, result.cached);
@@ -90,6 +99,16 @@ $("clear-btn").addEventListener("click", () => {
   summaryData = null;
   $("cached-tag").classList.add("hidden");
   show("state-empty");
+});
+
+$("brief-btn").addEventListener("click", () => {
+  briefMode = true;
+  summarize();
+});
+
+$("summarize-btn").addEventListener("click", () => {
+  briefMode = false;
+  summarize();
 });
 
 $("copy-btn").addEventListener("click", async () => {
